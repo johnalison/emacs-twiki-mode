@@ -453,8 +453,9 @@ twiki expects."
   (define-key twiki-mode-map (read-kbd-macro "C-c 5") 'twiki-heading-5)
 
   (define-key twiki-mode-map (read-kbd-macro "C-c i") 'twiki-import-for-edit)
-  (define-key twiki-mode-map (read-kbd-macro "C-c e") 'twiki-export-to-clipboard)
-
+  ;(define-key twiki-mode-map (read-kbd-macro "C-c e") 'twiki-export-to-clipboard)
+  (define-key twiki-mode-map (read-kbd-macro "C-c e") 'copy-to-clipboard)
+  
   (define-key twiki-mode-map (read-kbd-macro "C-c t p") 'twiki-preview)
   (define-key twiki-mode-map (read-kbd-macro "C-c t u") 'twiki-update)
   (define-key twiki-mode-map (read-kbd-macro "C-c t s") 'twiki-save)
@@ -1802,3 +1803,15 @@ Headings are prefixed with 1.1.1 notation."
         (find-file twiki-filename))
     )
   )
+
+
+(fset 'green-bullet
+   (kmacro-lambda-form [?\C-a ?* ?  ?% ?G ?R ?E ?E ?N ?  ?\C-h ?% ? ] 0 "%d"))
+
+(global-set-key "\C-x\C-kg" 'green-bullet)
+
+
+(fset 'red-bullet
+   (kmacro-lambda-form [?\C-a ?* ?  ?% ?R ?E ?D ?% ? ] 0 "%d"))
+
+(global-set-key "\C-x\C-kr" 'red-bullet)
